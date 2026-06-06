@@ -4,16 +4,17 @@ from PIL import Image
 import requests
 from io import BytesIO
 import os
+import re
 
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
 
-# מאגר תקלות 0.83 (אפשר להוסיף ולערוך)
+# מאגר התקלות - שים לב לירידות השורה (\n) וללינקים של התמונות
 ERRORS_DB = {
-    "error 38": "הפעל את המשחק כמנהל (Run as Administrator).",
-    "2147467259": "זו בעיה מוכרת בהגדרות תצוגה, גש ל: https://discord.com/channels/1110273045706330202/1392212997191237662/1458044710714216581",
-    "ijl15.dll": "חסר לך קובץ ה-DLL של המשחק. פתח טיקט ונישלח לך אותו."
+    "error 38": "הפעל את המשחק כמנהל (Run as Administrator).\nשלב 1: קליק ימני על האייקון.\nשלב 2: בחר Run as admin.\nhttps://i.imgur.com/example1.png",
+    "2147467259": "האקשילד חוסם את ההפעלה.\nאנא כבה את האנטי-וירוס או הוסף את תיקיית המשחק ל-Exclusions.",
+    "ijl15.dll": "חסר לך קובץ ה-DLL של המשחק.\nפתח טיקט ונישלח לך אותו."
 }
 
 @client.event
@@ -42,17 +43,25 @@ async def on_message(message):
     if not text_to_analyze.strip():
         return
 
-    # חיפוש תקלות מול המאגר
+    # 1. חיפוש תקלות מול המאגר
     for keyword, solution in ERRORS_DB.items():
         if keyword in text_to_analyze:
             await message.reply(f"**פתרון לתקלה:**\n{solution}")
             return
             
-    # אם אין התאמה וזה נראה כמו בקשת תמיכה
-    if "תקלה" in text_to_analyze or "error" in text_to_analyze or message.attachments:
-        await message.reply("לא זיהיתי את התקלה הזו במאגר. אנא פתח טיקט להנהלה.")
+    # 2. אם אין התאמה במאגר: נבדוק אם המשתמש ניסה להזין מספר שגיאה מפורש
+    # מחפש מילים כמו "error 123", "error123", או סתם רצף מספרים (2-5 ספרות)
+    looks_like_error_code = re.search(r'(error\s*\d+|\b\d{2,5}\b)', text_to_analyze)
+    
+    if looks_like_error_code:
+        await message.reply("אני לא מכיר את מספר השגיאה הזאת. אנא פתח טיקט להנהלה כדי לקבל עזרה פרטנית.")
+        return
 
-# משיכת הטוקן ממשתני הסביבה בשרת
+    # 3. אם אין מספר שגיאה ברור, וזה נראה כמו בקשת תמיכה כללית או תמונה לא ברורה
+    if "תקלה" in text_to_analyze or "בעיה" in text_to_analyze or "error" in text_to_analyze or message.attachments:
+        await message.reply("לא הצלחתי לזהות את התקלה מהתמונה או מהטקסט.\nאנא רשום את מספר השגיאה המדויק בצ'אט (למשל: `error 38`).")
+
+# הרצת הבוט מול משתנה הסביבה ב-Railway
 token = os.getenv('BOT_TOKEN')
 if token:
     client.run(token)
