@@ -12,7 +12,7 @@ client = discord.Client(intents=intents)
 
 # מאגר התקלות המעודכן
 ERRORS_DB = {
-    "2147467259": "שגיאת תאימות (Unspecified Error).\nשלב 1: קליק ימני על קובץ המשחק -> Properties.\nשלב 2: בלשונית Compatibility בחר Run in compatibility mode for Windows 7.",
+    "2147467259": "error code: -2147467259 (unspecified error) /n מהות השגיאה:/n משהו שקשור להגדרות \ שינוי גראפיקה \ דיירקט-איקס/n פתרון:/n Display Settings -> Advanced Display Settings -> Display Adapter Properties -> Select the "Monitor" tab -> and change the screen refresh rate from 59Hz to 60Hz and press Apply. /n פתרון אפשרי:/n יש לפתוח  Regedit /n לגשת לנתיב /n HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Wizet\MapleStory /n למחוק את התיקייה /n MapleStory \n זה יאפס את הגדרות התצוגה לברירת מחדל.",
     "error 38": "הפעל את המשחק כמנהל (Run as Administrator).\nשלב 1: קליק ימני על האייקון.\nשלב 2: בחר Run as admin.",
     "hackshield": "האקשילד חוסם את ההפעלה.\nאנא כבה את האנטי-וירוס או הוסף את תיקיית המשחק ל-Exclusions.",
     "ijl15.dll": "חסר לך קובץ ה-DLL של המשחק.\nפתח טיקט ונישלח לך אותו."
