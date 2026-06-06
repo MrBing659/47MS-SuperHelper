@@ -12,7 +12,7 @@ client = discord.Client(intents=intents)
 
 # מאגר התקלות המעודכן
 ERRORS_DB = {
-   "2147467259": "error code: -2147467259 (unspecified error)\nמהות השגיאה:\nמשהו שקשור להגדרות \\ שינוי גראפיקה \\ דיירקט-איקס.\n\nפתרון 1:\nDisplay Settings -> Advanced Display Settings -> Display Adapter Properties -> Select the 'Monitor' tab -> and change the screen refresh rate from 59Hz to 60Hz and press Apply.\n\nפתרון 2:\nיש לפתוח Regedit ולגשת לנתיב:\nHKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Wizet\\MapleStory\nיש למחוק את התיקייה MapleStory.\nזה יאפס את הגדרות התצוגה לברירת מחדל.",
+   "2147467259": "error code: -2147467259 (unspecified error)\nמהות השגיאה:\nמשהו שקשור להגדרות \\ שינוי גראפיקה \\ דיירקט-איקס.\n\nפתרון 1:\nDisplay Settings -> Advanced Display Settings -> Display Adapter Properties -> Select the 'Monitor' tab -> and change the screen refresh rate from 59Hz to 60Hz and press Apply.\n\nפתרון 2:\nיש ללחוץ WInKey+R (כפתור הווינדוס+ר),/n לרשום Regedit ולגשת לנתיב:\nHKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Wizet\\MapleStory\nיש למחוק את התיקייה MapleStory.\nזה יאפס את הגדרות התצוגה לברירת מחדל.",
     "error 38": "הפעל את המשחק כמנהל (Run as Administrator).\nשלב 1: קליק ימני על האייקון.\nשלב 2: בחר Run as admin.",
     "hackshield": "האקשילד חוסם את ההפעלה.\nאנא כבה את האנטי-וירוס או הוסף את תיקיית המשחק ל-Exclusions.",
     "ijl15.dll": "חסר לך קובץ ה-DLL של המשחק.\nפתח טיקט ונישלח לך אותו."
